@@ -1,0 +1,69 @@
+================================================================================
+AIR QUALITY DATA PREPROCESSING REPORT
+================================================================================
+Generated: 2026-05-13 13:00:59
+
+PREPROCESSING TECHNIQUES APPLIED:
+--------------------------------------------------------------------------------
+1. Data Loading and Initial Inspection
+   - Loaded raw CSV data
+   - Inspected data types and structure
+
+2. Duplicate Removal
+   - Removed duplicate timestamps
+   - Kept first occurrence of duplicates
+
+3. Data Type Conversion
+   - Converted timestamp to datetime format
+   - Converted all pollutant columns to numeric
+
+4. Outlier Detection and Removal
+   - Applied domain-based valid ranges:
+     * AQI: 0-500
+     * PM2.5: 0-500 μg/m³
+     * PM10: 0-600 μg/m³
+     * NO2: 0-400 ppb
+     * SO2: 0-1000 ppb
+     * CO: 0-50 ppm
+     * O3: 0-500 ppb
+   - Replaced outliers with NaN for imputation
+
+5. Missing Value Imputation (Median Strategy)
+   - Used median imputation for robustness against outliers
+   - Median values used:
+     * AQI: 256.00
+     * PM2.5: 144.41
+     * PM10: 231.04
+     * NO2: 79.53
+     * SO2: 41.75
+     * CO: 7.80
+     * O3: 91.25
+     * Temperature: 28.40
+     * Humidity: 59.50
+
+6. Data Validation
+   - Checked for remaining null values
+   - Verified no infinite values
+   - Calculated data completeness score
+
+7. Sorting and Indexing
+   - Sorted by timestamp (newest first)
+   - Reset index for clean sequential access
+
+8. Data Export
+   - Saved to: aqi_data_preprocessed.csv
+
+
+================================================================================
+FINAL DATASET INFORMATION
+================================================================================
+Shape: (140, 11)
+Records: 140
+Features: 11
+Columns: Timestamp, Location, AQI, PM2.5, PM10, NO2, SO2, CO, O3, Temperature, Humidity
+
+Data Quality Metrics:
+- Missing values: 0
+- Duplicate timestamps: 0 (removed)
+- Outliers: 0 (removed)
+
